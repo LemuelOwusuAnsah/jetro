@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jetro · Music Jams Festival</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0c0b0e;
+      color: #f5f0eb;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(255, 140, 200, 0.08), transparent 40%),
+                  radial-gradient(circle at 90% 70%, rgba(120, 200, 255, 0.08), transparent 45%),
+                  repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 6px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ===== HEADER / NAV ===== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(130deg, #ffe6b0, #ffb3c6, #c0e0ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px rgba(255, 200, 220, 0.3);
+    }
+
+    .logo span {
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: #aaa9b6;
+      margin-left: 6px;
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      text-shadow: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links a {
+      color: #cfcdd9;
+      text-decoration: none;
+      transition: color 0.2s, text-shadow 0.2s;
+      font-size: 1rem;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+      text-shadow: 0 0 12px #ffb3c6, 0 0 24px #c0e0ff;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 4rem 0 5rem;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3rem, 12vw, 7rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      max-width: 1000px;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(120deg, #fdd9b5, #ffb3c6, #a7d0ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+      position: relative;
+    }
+
+    .hero .subhead {
+      font-size: 1.3rem;
+      color: #b9b7c9;
+      max-width: 650px;
+      margin-bottom: 2.5rem;
+      border-left: 4px solid #ffb3c6;
+      padding-left: 1.5rem;
+      font-weight: 400;
+    }
+
+    .hero .date-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 200, 220, 0.25);
+      border-radius: 60px;
+      padding: 0.8rem 2rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    .hero .date-badge .dot {
+      width: 10px;
+      height: 10px;
+      background: #ffb3c6;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #ffb3c6;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.3); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 40px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      letter-spacing: 0.01em;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ffb3c6, #fdd9b5);
+      color: #0c0b0e;
+      box-shadow: 0 8px 24px rgba(255, 180, 200, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(255, 180, 200, 0.4);
+      background: linear-gradient(135deg, #ffc8d6, #ffe6c7);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #f5f0eb;
+      backdrop-filter: blur(4px);
+    }
+
+    .btn-outline:hover {
+      border-color: #ffb3c6;
+      background: rgba(255, 180, 200, 0.1);
+      transform: translateY(-3px);
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.02em;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(90deg, #ffb3c6, #a7d0ff, transparent);
+      border-radius: 4px;
+    }
+
+    /* ===== HIGHLIGHTS ===== */
+    .highlights {
+      padding: 5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .highlight-card {
+      background: rgba(20, 18, 26, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 20px 35px -15px rgba(0,0,0,0.6);
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 180, 200, 0.4);
+      box-shadow: 0 30px 45px -15px rgba(255, 180, 200, 0.15);
+    }
+
+    .highlight-card .card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.85) saturate(1.2);
+      transition: transform 0.5s ease, filter 0.3s ease;
+    }
+
+    .highlight-card:hover .card-image {
+      transform: scale(1.05);
+      filter: brightness(0.95) saturate(1.4);
+    }
+
+    .highlight-card .card-content {
+      padding: 1.8rem;
+    }
+
+    .highlight-card h3 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      font-family: 'Space Grotesk', sans-serif;
+      background: linear-gradient(130deg, #fff, #cfcdd9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .highlight-card p {
+      color: #b1afc0;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    /* ===== LINEUP / ARTIST PREVIEW ===== */
+    .gallery {
+      padding: 5rem 0;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .art-piece {
+      background: #16141c;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1.2;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+      border: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 18px 30px -12px #00000080;
+      position: relative;
+    }
+
+    .art-piece:hover {
+      transform: scale(1.02) translateY(-6px);
+      border-color: rgba(255, 180, 200, 0.5);
+      box-shadow: 0 28px 40px -12px rgba(255, 180, 200, 0.25);
+    }
+
+    .art-piece .art-image {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .art-piece:hover .art-image {
+      transform: scale(1.08);
+    }
+
+    .art-info {
+      padding: 1.2rem 1rem;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      z-index: 2;
+    }
+
+    .art-info h4 {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+      color: #f0ecf5;
+    }
+
+    .art-info span {
+      font-size: 0.85rem;
+      color: #a7a3b8;
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta {
+      padding: 5rem 0 6rem;
+      text-align: center;
+    }
+
+    .cta-box {
+      background: linear-gradient(145deg, #18151f, #0e0c12);
+      border: 1px solid rgba(255, 180, 200, 0.2);
+      border-radius: 48px;
+      padding: 3.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 50px -20px #000000cc;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -20%;
+      width: 80%;
+      height: 180%;
+      background: radial-gradient(circle, rgba(255, 180, 200, 0.1), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(130deg, #fff, #ffe0ec, #c0e0ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .cta-box p {
+      color: #bcbacb;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.1rem;
+    }
+
+    .cta-box .btn-primary {
+      padding: 1.1rem 3rem;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, #ffb3c6, #d9b8ff, #a7d0ff);
+      color: #0c0b0e;
+      font-weight: 700;
+    }
+
+    .cta-box .btn-primary:hover {
+      background: linear-gradient(135deg, #ffc2d2, #e2c6ff, #b8dcff);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: #8f8b9c;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: #b1adc0;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #ffb3c6;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 700px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+      }
+      .hero .subhead {
+        font-size: 1.1rem;
+        padding-left: 1rem;
+      }
+      .hero .date-badge {
+        font-size: 1rem;
+        padding: 0.6rem 1.4rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .cta-box h2 {
+        font-size: 1.9rem;
+      }
+      .btn {
+        padding: 0.8rem 1.6rem;
+      }
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 1.6rem;
+      }
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .accent-line {
+      height: 2px;
+      width: 100%;
+      background: linear-gradient(90deg, transparent, #ffb3c6, #a7d0ff, transparent);
+      opacity: 0.3;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+      <div class="logo">JETRO<span>AFRICA</span></div>
+      <div class="nav-links">
+        <a href="#highlights">Jams</a>
+        <a href="#gallery">Lineup</a>
+        <a href="#tickets">Tickets</a>
+        <a href="#about">About</a>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+      <div class="date-badge">
+        <span class="dot"></span> 12 — 15 SEPT 2025 · RIVERSIDE BEACH
+      </div>
+      <h1>
+        Where <span class="highlight">sound</span><br>
+        meets <span class="highlight">soul</span>
+      </h1>
+      <div class="subhead">
+        Four days of live music jams, beachside rhythms, and pure euphoria. 
+        Jetro Africa returns — louder, bolder, and more electric than ever.
+      </div>
+      <div class="btn-group">
+        <a href="#tickets" class="btn btn-primary">Get passes</a>
+        <a href="#gallery" class="btn btn-outline">See lineup</a>
+      </div>
+    </header>
+
+    <div class="accent-line"></div>
+  </div>
+
+  <!-- HIGHLIGHTS SECTION -->
+  <section class="highlights" id="highlights">
+    <div class="container">
+      <h2 class="section-title">Jam highlights</h2>
+      <div class="grid-3">
+        <div class="highlight-card">
+          <img class="card-image" src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80" alt="Ghanaian musicians jamming together on the beach at sunset">
+          <div class="card-content">
+            <h3>Live jam sessions</h3>
+            <p>Musicians from across Ghana and the diaspora link up for spontaneous, unrehearsed jams. Anything can happen — and it always does.</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <img class="card-image" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80" alt="DJ playing afrobeats at a beachside festival with a joyful Ghanaian crowd">
+          <div class="card-content">
+            <h3>Jetro beats stage</h3>
+            <p>Curated sets from underground R&amp;B, afrobeats, highlife, and electronic artists. Sunset sessions &amp; after-dark grooves.</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <img class="card-image" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=80" alt="Ghanaian musician playing guitar in an open-air beach workshop">
+          <div class="card-content">
+            <h3>Open jam labs</h3>
+            <p>Bring your instrument or just your voice. Guided jam circles, drum workshops, and vocal freestyle sessions. All levels welcome.</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <img class="card-image" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&q=80" alt="Immersive sound and light installation glowing at night by the water">
+          <div class="card-content">
+            <h3>Immersive sound park</h3>
+            <p>After dusk, the beach becomes a glowing wonderland with projection mapping and interactive sound sculptures.</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <img class="card-image" src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&q=80" alt="Colorful handmade crafts and merch at a beachside maker's market">
+          <div class="card-content">
+            <h3>Maker's market</h3>
+            <p>50+ independent creators selling vinyl, wearables, handmade instruments, and one-of-a-kind pieces.</p>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <img class="card-image" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Friends enjoying street food and drinks at a beach festival">
+          <div class="card-content">
+            <h3>Street food &amp; chill</h3>
+            <p>Local food trucks, craft coffee, and a cozy lounge area to recharge between jams.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINEUP / ARTIST PREVIEW -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <h2 class="section-title">Featured artists</h2>
+      <div class="gallery-grid">
+        <div class="art-piece">
+          <img class="art-image" src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=500&q=80" alt="Ghanaian DJ and electronic producer performing at beach jam">
+          <div class="art-info">
+            <h4>Mira Chen</h4>
+            <span>DJ &amp; electronic</span>
+          </div>
+        </div>
+        <div class="art-piece">
+          <img class="art-image" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&q=80" alt="Ghanaian afrobeat and R&B vocalist performing live">
+          <div class="art-info">
+            <h4>J. Álvarez</h4>
+            <span>Afrobeat &amp; R&amp;B</span>
+          </div>
+        </div>
+        <div class="art-piece">
+          <img class="art-image" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80" alt="Ghanaian soul and jazz singer at the beach jam">
+          <div class="art-info">
+            <h4>Nadia Okafor</h4>
+            <span>Soul &amp; jazz</span>
+          </div>
+        </div>
+        <div class="art-piece">
+          <img class="art-image" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Ghanaian percussionist and live loop artist">
+          <div class="art-info">
+            <h4>Kai Nakamura</h4>
+            <span>Percussion &amp; live loops</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta" id="tickets">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Ready to jam &amp; celebrate?</h2>
+        <p>Early-bird passes include access to all jam sessions, workshops, and evening concerts. Limited availability.</p>
+        <a href="#" class="btn btn-primary">Get your festival pass →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="container" id="about">
+    <div>© 2025 Jetro Africa — independent &amp; unapologetic.</div>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">Press</a>
+      <a href="#">Volunteer</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+</body>
+</html>
